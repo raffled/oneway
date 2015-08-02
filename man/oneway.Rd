@@ -20,6 +20,7 @@ attach(coagulation)
 oneway(split(coag, diet))
 oneway(diet, coag)
 oneway(coag~diet)
+summary(oneway(coag~diet))
 
 lsmeans(oneway(coag~diet))
 plot(oneway(coag~diet))
