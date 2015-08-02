@@ -42,19 +42,25 @@
   \item{y}{ a vector of observations corresponding to the factor z }
   \item{formula}{ the model to fit of the form \code{response~factor} }
   \item{data}{ an optional dataframe containing the variables in
-    the model represented by \code{formula} }
+    the model represented by \code{formula}
+  }
   \item{x}{ a oneway object }
   \item{object}{ a oneway object }
   \item{names}{ default value to use the names from the list as
-    labels in the boxplot }
+    labels in the boxplot
+  }
   \item{xlab}{ default value to used \"Group\" as the xlabel of the
-    plot }
+    plot
+  }
   \item{ylab}{ default option to use \"Response\" as the ylabel
-    of the plot }
+    of the plot
+  }
   \item{main}{ default option to use the function
-    all that created the oneway object as the title of the plot }
+    all that created the oneway object as the title of the plot
+  }
   \item{\dots}{ only used by \code{plot()} to pass optional graphics
-    parameters. }
+    parameters.
+  }
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -100,7 +106,7 @@ plot(coag.oneway)
 ## From a factor & vector:
 oneway(diet, coag)
 
-##From a formula:
+## From a formula:
 oneway(coag~diet)
 
 detach(coagulation)
