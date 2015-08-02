@@ -1,13 +1,14 @@
 \name{oneway}
 \alias{oneway}
 \alias{oneway.default}
-\alias{oneeway.formula}
+\alias{oneway.formula}
 \alias{oneway.factor}
 \alias{print.oneway}
 \alias{summary.oneway}
 \alias{print.summary.oneway}
 \alias{lsmeans}
 \alias{lsmeans.default}
+\alias{lsmeans.oneway}
 \alias{print.lsmeans}
 \alias{plot.oneway}
 \title{
