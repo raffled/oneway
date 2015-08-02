@@ -1,16 +1,22 @@
-######################################################################
-#####################           oneway.R          ####################
-######################################################################
-## contains source code for oneway S3 class.                        ##
-######################################################################
-
-######################################################################
-####################          Methods           ######################
-######################################################################
+#' Perform a oneway analysis of variance
+#'
+#' @param z A list of responses grouped by factor level
+#' @param ... Addition arguments used by other S3 methods
+#'
+#' @seealso \code{\link{oneway.factor}}, \code{\link{oneway.formula}},
+#' \code{\link{summary.oneway}}, \code{\link{plot.oneway}}, \code{\link{lsmeans}}
+#' @examples
+#' library(faraway)
+#' data(coagulation)
+#' attach(coagulation)
+#' oneway(split(coag, diet))
+#' oneway(diet, coag)
+#' oneway(coag~diet)
+#'
+#' @export
 oneway <- function(z, ...) UseMethod("oneway")
 
-####################      oneway.default      ########################
-## Default method, takes list & returns oneway object.
+#' @export
 oneway.default <- function(z, ...) {
     ## Make sure we're the right data structure
     if(!is.list(z) | is.data.frame(z)){
@@ -46,16 +52,34 @@ oneway.default <- function(z, ...) {
     return(res)
 }
 
-####################      oneway.factor      #########################
-## takes a vector & factor, calls oneway.default
+#' oneway.factor
+#'
+#' S3 method for \code{\link{oneway}} using a response vector and factor
+#'
+#' @param z A factor of levels for each observation
+#' @param y A vector of responses
+#' @param ... Addition arguments used by other S3 methods
+#'
+#' @seealso \code{link{oneway}}
+#'
+#' @export
 oneway.factor <- function(z, y, ...) {
     foo <- oneway.default(split(y, z))
     foo$call <- match.call()
     foo
 }
 
-####################      oneway.formula      ########################
-## takes formula & extracts vector & factor, calls oneway.factor
+#' oneway.formula
+#'
+#' An S3 method for \code{\link{oneway}} for formulas.
+#'
+#' @param formula A formula of the form \code{response~factor}
+#' @param data An (optional) data frame used by the formula.
+#' @param ... Addition arguments used by other S3 methods
+#'
+#' @seealso \code{\link{oneway}}
+#'
+#' @export
 oneway.formula <- function(formula, data=list(), ...) {
     mf <- model.frame(formula, data)
     foo <- oneway.factor(mf[,2], mf[,1])
@@ -63,12 +87,7 @@ oneway.formula <- function(formula, data=list(), ...) {
     foo
 }
 
-######################################################################
-####################          Utility           ######################
-######################################################################
-
-####################       print.oneway       ########################
-## prints basic summary
+#' @export
 print.oneway <- function(x, ...) {
    print(x$call)
    cat("\nWithin SS:", x$SS[1], "on", x$df[1],
@@ -77,8 +96,13 @@ print.oneway <- function(x, ...) {
        "degrees of freedom.\n")
 }
 
-###################       summary.oneway       #######################
-## creates summary object
+
+#' Creates an Analysis of Variance table for a \code{oneway} object
+#'
+#' @param object An object of class \code{oneway}
+#' @param ... Addition arguments used by other S3 methods
+#'
+#' @export
 summary.oneway <- function(object, ...) {
     attach(object)
     ## Get total SS & df
@@ -106,8 +130,7 @@ summary.oneway <- function(object, ...) {
     return(res)
 }
 
-################       print.summary.oneway       ####################
-## prints the summary object
+#' @export
 print.summary.oneway <- function(x, ...) {
     ## function call
     cat("Call:\n\t")
@@ -122,26 +145,42 @@ print.summary.oneway <- function(x, ...) {
                  signif.stars=TRUE, na.print="")
 }
 
-####################       print.oneway       ########################
-## prints side-by-sidee boxplot of data
-plot.oneway <- function(x, names=x$groups, xlab="Group", ylab="Response", main=capture.output(x$call), ...){
-    boxplot(x=x$data, names=names, xlab=xlab, ylab=ylab, main=main,
-            ...)
+#' Creates a side-by-side boxplot of groups in a \code{oneway} object
+#'
+#' @param x A \code{oneway} object
+#' @param xlab X label of graph
+#' @param ylab Y label of graph
+#' @param main Main plot title
+#' @param ... Optional graphing arguments to be passed to
+#' \code{boxplot}
+#'@param names Names of factor levels
+#' @seealso \code{link{boxplot}}
+#'
+#' @export
+plot.oneway <- function(x, names=x$groups, xlab="Group", ylab="Response",
+                        main=capture.output(x$call), ...){
+    boxplot(x=x$data, names=names, xlab=xlab, ylab=ylab, main=main, ...)
 }
 
-######################################################################
-####################          lsmeans           ######################
-######################################################################
-## perform's Fisher's LSD test for a oneway object
+#' Perform Fisher's LSD
+#'
+#' Test pairwise differences using Fisher's LSD proceduce on a
+#' \code{oneway} object
+#'
+#' @param object A \code{oneway} object
+#'
+#' @export
+lsmeans <- function(object) UseMethod("lsmeans")
 
-####################         methods          ########################
-lsmeans <- function(object, ...) UseMethod("lsmeans")
-lsmeans.default <- function(object, ...){
+#' @export
+lsmeans.default <- function(object){
     if(!(class(object)=="oneway")){
         stop("lsmeans only accepts class \"oneway\"")
     }
 }
-lsmeans.oneway <- function(object, ...) {
+
+#' @export
+lsmeans.oneway <- function(object) {
     object <- summary(object)
     if(object$P > 0.05){
         warning("F-test is not significant at alpha=0.05.")
@@ -159,7 +198,8 @@ lsmeans.oneway <- function(object, ...) {
     class(result) <- "lsmeans"
     result
 }
-#####################         print          #########################
+
+#' @export
 print.lsmeans <- function(x, ...){
     cat("Call:\n\t")
     print(x$call)

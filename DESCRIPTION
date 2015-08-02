@@ -6,5 +6,6 @@ Date: 2015-08-02
 Author: Doug Raffle
 Maintainer: Doug Raffle <dcraffle@mix.wvu.edu>
 Description: Performs a oneway analysis of variance given: a named list of samples, a vector of responses and a factor with the group labels, or a formula.
+Suggests: faraway
 License: GPL-3
 LazyData: TRUE
