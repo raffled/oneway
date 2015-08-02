@@ -2,7 +2,7 @@
 % Please edit documentation in R/oneway.R
 \name{summary.oneway}
 \alias{summary.oneway}
-\title{Creates an Analysis of Variance table for a \code{oneway} object}
+\title{summary.oneway}
 \usage{
 \method{summary}{oneway}(object, ...)
 }

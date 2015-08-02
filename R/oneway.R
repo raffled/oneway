@@ -6,12 +6,14 @@
 #' @seealso \code{\link{oneway.factor}}, \code{\link{oneway.formula}},
 #' \code{\link{summary.oneway}}, \code{\link{plot.oneway}}, \code{\link{lsmeans}}
 #' @examples
-#' library(faraway)
 #' data(coagulation)
 #' attach(coagulation)
 #' oneway(split(coag, diet))
 #' oneway(diet, coag)
 #' oneway(coag~diet)
+#'
+#' lsmeans(oneway(coag~diet))
+#' plot(oneway(coag~diet))
 #'
 #' @export
 oneway <- function(z, ...) UseMethod("oneway")
@@ -97,6 +99,8 @@ print.oneway <- function(x, ...) {
 }
 
 
+#' summary.oneway
+#'
 #' Creates an Analysis of Variance table for a \code{oneway} object
 #'
 #' @param object An object of class \code{oneway}

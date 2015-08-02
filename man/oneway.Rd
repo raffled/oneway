@@ -15,12 +15,14 @@ oneway(z, ...)
 Perform a oneway analysis of variance
 }
 \examples{
-library(faraway)
 data(coagulation)
 attach(coagulation)
 oneway(split(coag, diet))
 oneway(diet, coag)
 oneway(coag~diet)
+
+lsmeans(oneway(coag~diet))
+plot(oneway(coag~diet))
 }
 \seealso{
 \code{\link{oneway.factor}}, \code{\link{oneway.formula}},
