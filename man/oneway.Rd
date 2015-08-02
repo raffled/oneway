@@ -37,7 +37,7 @@
     a (possibly named) list where each element is a vector of
     observations for a level of the factor or a factor, depending on how
     the function is called.
-  } 
+  }
   \item{y}{ a vector of observations corresponding to the factor z }
   \item{formula}{ the model to fit of the form \code{response~factor} }
   \item{data}{ an optional dataframe containing the variables in
@@ -73,11 +73,11 @@
 
   \code{print()} gives a succinct summary of the data (degrees of freedom
   and sums of squares).
-  
+
   \code{summary()} creates/displays the \code{ANOVA} table and group means.
-  
+
   \code{plot()} displays a side-by-side boxplot of the groups (treatments).
-  
+
   \code{lsmeans()} performs and displays Fisher's LSD procedure on a
   \code{oneway} object.  This function will throw an error if called on
   any object of any other class.
@@ -97,10 +97,10 @@ lsmeans(coag.oneway)
 plot(coag.oneway)
 
 ## From a factor & vector:
-oneway(coagulation$diet, coagulation$coag)
+oneway(diet, coag)
 
 ##From a formula:
-oneway(coagulation$coag~coagulation$diet)
+oneway(coag~diet)
 
 detach(coagulation)
 }

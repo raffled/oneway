@@ -25,8 +25,8 @@ oneway.default <- function(z, ...) {
     ## computes SS's and DF's
     ss.a <- A - CF ## within
     ss.e <- TT - A ## between
-    df.a <- a - 1 
-    df.e <- N - a 
+    df.a <- a - 1
+    df.e <- N - a
     ## get LS Means & sample sizes
     ybar.vec <- unlist(lapply(z, mean))
     n.vec <- unlist(lapply(z, length))
@@ -119,14 +119,14 @@ print.summary.oneway <- function(x, ...) {
     # AOV Table
     cat("\nAnalysis of Variance Table:\n")
     printCoefmat(x$tab, P.values=TRUE, has.Pvalue=TRUE,
-                 signif.stars=TRUE, na.print="") 
+                 signif.stars=TRUE, na.print="")
 }
 
 ####################       print.oneway       ########################
 ## prints side-by-sidee boxplot of data
 plot.oneway <- function(x, names=x$groups, xlab="Group", ylab="Response", main=capture.output(x$call), ...){
     boxplot(x=x$data, names=names, xlab=xlab, ylab=ylab, main=main,
-            ...) 
+            ...)
 }
 
 ######################################################################
@@ -135,7 +135,7 @@ plot.oneway <- function(x, names=x$groups, xlab="Group", ylab="Response", main=c
 ## perform's Fisher's LSD test for a oneway object
 
 ####################         methods          ########################
-lsmeans <- function(x, ...) UseMethod("lsmeans")
+lsmeans <- function(object, ...) UseMethod("lsmeans")
 lsmeans.default <- function(object, ...){
     if(!(class(object)=="oneway")){
         stop("lsmeans only accepts class \"oneway\"")
