@@ -1,10 +1,10 @@
 Package: oneway
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Oneway Analysis of Variance
 Version: 0.1
 Date: 2015-08-02
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Doug Raffle
+Maintainer: Doug Raffle <dcraffle@mix.wvu.edu>
+Description: Performs a oneway analysis of variance given: a named list of samples, a vector of responses and a factor with the group labels, or a formula.
+License: GPL-3
 LazyData: TRUE
